@@ -26,8 +26,29 @@ function addProjectDetails(e) {
 	// get rid of 'project' from the front of the id 'project3'
 	var idNumber = projectID.substr('project'.length);
 
+
+	$.get("/project/"+idNumber, addProject);
+	console.log("/project/"+idNumber);
+
 	console.log("User clicked on project " + idNumber);
 }
+
+
+function addProject (result){
+	console.log(result);
+	
+	var projectHTML = 
+	'<img src="'+ result['image'] + '"class = "detailsImage">'+
+	'<h3>' + result['title'] + '</h3>' +
+	'<p><small>' + result['date'] + '</small></p>' +
+	'<p>' + result['sumary'] + '</p>';
+
+
+	var insert = '#project' + result['id'] + ' .details';
+	console.log(insert);
+	$(insert).html(projectHTML);	
+}
+
 
 /*
  * Make an AJAX call to retrieve a color palette for the site
